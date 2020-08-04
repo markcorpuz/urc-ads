@@ -13,6 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
+// include file
+require_once( 'setup-header-footer-scripts.php' );
+
+
 // this shortcode loads the Google AD JavaScript onto the page
 add_action( 'wp_head', 'setup_load_google_ad_js_func', 6 );
 //add_action( 'wp_footer', 'setup_load_google_ad_js_func', 6 );
