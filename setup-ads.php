@@ -18,8 +18,8 @@ require_once( 'setup-header-footer-scripts.php' );
 
 
 // this shortcode loads the Google AD JavaScript onto the page
-add_action( 'wp_head', 'setup_load_google_ad_js_func', 6 );
-//add_action( 'wp_footer', 'setup_load_google_ad_js_func', 6 );
+//add_action( 'wp_head', 'setup_load_google_ad_js_func', 6 );
+add_action( 'wp_footer', 'setup_load_google_ad_js_func', 6 );
 function setup_load_google_ad_js_func() {
 
 	if( setup_bot_detected() ) {
