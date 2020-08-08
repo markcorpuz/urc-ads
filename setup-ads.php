@@ -13,9 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-// include file
-require_once( 'setup-header-footer-scripts.php' );
-
 
 // this shortcode loads the Google AD JavaScript onto the page
 //add_action( 'wp_head', 'setup_load_google_ad_js_func', 6 );
@@ -28,25 +25,43 @@ function setup_load_google_ad_js_func() {
 
 }
 
+
 // shortcode for calling the ad display handler
 add_shortcode( 'spk_adsbygoogle_js', 'setup_adsbygoogle_function' );
 function setup_adsbygoogle_function() {
 
 	if( setup_bot_detected() ) {
 
-		return '<!-- Page & Post Article Body Resposive Ad -->
-				<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-client="ca-pub-0947746501358966"
-					data-ad-slot="7597430493"
-					data-ad-format="auto">
-				</ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>';
+		return '<div class="adsense-sidebar">
+					<!-- Page & Post Article Body Resposive Ad -->
+					<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-0947746501358966"
+						data-ad-slot="7597430493"
+						data-ad-format="auto">
+					</ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>';
 
 	}
 
+}
+
+
+add_filter( 'widget_text', 'do_shortcode' );
+
+
+add_action( 'genesis_before_content_sidebar_wrap', 'top_google_ads' );
+function top_google_ads() {
+	echo '<div class="padding">'.do_shortcode( "[spk_adsbygoogle_js][/spk_adsbygoogle_js]" ).'</div>';
+}
+
+
+add_action( 'genesis_after_content_sidebar_wrap', 'bottom_google_ads' );
+function bottom_google_ads() {
+	echo '<div class="padding">'.do_shortcode( "[spk_adsbygoogle_js][/spk_adsbygoogle_js]" ).'</div>';
 }
 
     	/*return '<script async src="'.plugin_dir_url( __FILE__ )."js_external/adsbygoogle.js?ver=".date( 'YmdHis', filemtime( plugin_dir_path( __FILE__ )."js_external/adsbygoogle.js" ) ).'"></script>
