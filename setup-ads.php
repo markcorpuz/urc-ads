@@ -32,7 +32,7 @@ function setup_adsbygoogle_function() {
 
 	if( setup_bot_detected() ) {
 
-		return '<div class="adsense-sidebar">
+		return '<div>
 					<!-- Page & Post Article Body Resposive Ad -->
 					<ins class="adsbygoogle"
 						style="display:block"
