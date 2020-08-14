@@ -50,6 +50,33 @@ function setup_adsbygoogle_function() {
 }
 
 
+/* --------------------------------------------------------------------------------------------
+ * | Widget entry
+ * | --------------
+ * | REGISTER SHORTCODE TO HIDE GOOGLE'S OWN SCRIPTS FROM BEING TAGGED BY THEM - 2
+ * ----------------------------------------------------------------------------------------- */
+add_shortcode( 'spk_google_suggested_articles_js', 'setup_adsbygoogle_function_2' );
+function setup_adsbygoogle_function_2() {
+
+	if( setup_bot_detected() ) {
+
+    	return '<div>
+					<ins class="adsbygoogle"
+					     style="display:block"
+					     data-ad-format="autorelaxed"
+					     data-ad-client="ca-pub-0947746501358966"
+					     data-ad-slot="2135583692"></ins>
+					<script>
+					     (adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>';
+				
+	}
+
+}
+
+
+// execute shortcodes in widget
 add_filter( 'widget_text', 'do_shortcode' );
 
 
