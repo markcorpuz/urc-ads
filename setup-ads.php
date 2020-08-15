@@ -154,11 +154,10 @@ function setup_bot_detected() {
  * ----------------------------------------------------------------------------------------- */
 add_shortcode( 'spk_amazon_market_place', 'spk_amazon_market_place_func' );
 function spk_amazon_market_place_func() {
-	//if( strpos( $_SERVER['HTTP_USER_AGENT'], "Google Page Speed Insights" ) == FALSE ) {
 
-	// 20190919
-	//if( spk_bot_detected() ) {
+	if( setup_bot_detected() ) {
 		//return '<script src="'.plugin_dir_url( __FILE__ )."js_external/amazon_marketplace.js?ver=".date( 'YmdHis', filemtime( plugin_dir_path( __FILE__ )."js_external/amazon_marketplace.js" ) ).'"></script>';
-		return '<script src="http://z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=9f2cb097-ecee-468c-b007-0b4fcd5a22c9"></script>';
-	//}
+		return '<div id="amzn-assoc-ad-9f2cb097-ecee-468c-b007-0b4fcd5a22c9"></div><script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=9f2cb097-ecee-468c-b007-0b4fcd5a22c9"></script>';
+	}
+	
 }
