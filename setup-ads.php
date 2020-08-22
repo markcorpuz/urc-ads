@@ -14,16 +14,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 
-// this shortcode loads the Google AD JavaScript onto the page
-//add_action( 'wp_head', 'setup_load_google_ad_js_func', 6 );
-add_action( 'wp_footer', 'setup_load_google_ad_js_func', 6 );
+// Load the Google AD script after x number of minutes
+add_action( 'wp_footer', 'setup_load_google_ad_js_func', 10000 );
 function setup_load_google_ad_js_func() {
 
 	if( setup_bot_detected() ) {
-		echo '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>';
+
+		// original
+		//echo '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>';
+
+		echo setup_minify_javascript( '<script type="text/javascript">
+			jQuery( document ).ready( function() {
+
+				var counter = 3; // in seconds
+				setInterval( function() {
+
+				    counter--;
+
+				    // Display counter wherever you want to display it.
+				    if( counter === 0 ) {
+				    	
+				    	// load google ad JS
+				    	jQuery( "footer" ).append( \'<script data-ad-client="ca-pub-0947746501358966" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>\' );
+
+				    	// load the rest of the codes
+				    	//LoadTheCodes();
+
+				    }
+
+				}, 1000);
+				
+			});
+		</script>' );
+		// OLD CODE: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"><\/script>
 	}
 
-}
+} //jQuery( this ).append( <? php echo setup_show_these_ads(); ? > );
 
 
 // shortcode for calling the ad display handler
@@ -44,9 +70,24 @@ function setup_adsbygoogle_function() {
 					(adsbygoogle = window.adsbygoogle || []).push({});
 					</script>
 				</div>';
-
+		
+		//return 'Ads original placement.';
 	}
 
+}
+function setup_show_these_ads() {
+	return '<div>
+				<!-- Page & Post Article Body Resposive Ad -->
+				<ins class="adsbygoogle"
+					style="display:block"
+					data-ad-client="ca-pub-0947746501358966"
+					data-ad-slot="7597430493"
+					data-ad-format="auto">
+				</ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>';
 }
 
 
@@ -161,3 +202,82 @@ function spk_amazon_market_place_func() {
 	}
 	
 }
+
+// ##########################################################################################################################
+// # LAZY LOAD ADS ##########################################################################################################
+// ##########################################################################################################################
+// ##########################################################################################################################
+// ##########################################################################################################################
+
+add_action( 'wp_footer', 'setup_inline_ss_ads_js', 100 );
+function setup_inline_ss_ads_js() {
+
+	$js_file = file_get_contents( plugins_url( 'js/ss_ads_asset.js', __FILE__ ) );
+
+    ?><script type="text/javascript">
+
+    	<?php
+        if( !empty( $js_file ) ) {
+            echo setup_minify_javascript( $js_file );
+        }
+        ?>
+
+    </script><?php
+
+}
+	
+
+add_action ( 'wp_head', 'my_js_variables', 10000 );
+function my_js_variables(){ 
+
+	/*$sol_plug_dir = plugins_url().'/soliloquy/assets/css/';
+    $soliloquy_css = file_get_contents( $sol_plug_dir.'soliloquy.css' );
+    if( !empty( $soliloquy_css ) ) {
+        $soli_styles = str_replace( 'images/', $sol_plug_dir.'images/', $soliloquy_css );
+        //echo setup_minify_css( $soliloquy_css );
+    }*/
+
+	?>
+	<script type="text/javascript">
+
+	var setup_soliloquy = <?php echo json_encode( array( 
+		'soli_sc' => do_shortcode( '[soliloquy id="32558"]' ),
+//		'soli_styles' => $soli_styles,
+	) ); ?>
+	</script><?php
+}
+
+
+// JAVASCRIPT MINIFIER
+if( !function_exists( 'setup_minify_javascript' ) ) {
+    
+    function setup_minify_javascript( $input ) {
+
+        if(trim($input) === "") return $input;
+        return preg_replace(
+            array(
+                // Remove comment(s)
+                '#\s*("(?:[^"\\\]++|\\\.)*+"|\'(?:[^\'\\\\]++|\\\.)*+\')\s*|\s*\/\*(?!\!|@cc_on)(?>[\s\S]*?\*\/)\s*|\s*(?<![\:\=])\/\/.*(?=[\n\r]|$)|^\s*|\s*$#',
+                // Remove white-space(s) outside the string and regex
+                '#("(?:[^"\\\]++|\\\.)*+"|\'(?:[^\'\\\\]++|\\\.)*+\'|\/\*(?>.*?\*\/)|\/(?!\/)[^\n\r]*?\/(?=[\s.,;]|[gimuy]|$))|\s*([!%&*\(\)\-=+\[\]\{\}|;:,.<>?\/])\s*#s',
+                // Remove the last semicolon
+                '#;+\}#',
+                // Minify object attribute(s) except JSON attribute(s). From `{'foo':'bar'}` to `{foo:'bar'}`
+                '#([\{,])([\'])(\d+|[a-z_][a-z0-9_]*)\2(?=\:)#i',
+                // --ibid. From `foo['bar']` to `foo.bar`
+                '#([a-z0-9_\)\]])\[([\'"])([a-z_][a-z0-9_]*)\2\]#i'
+            ),
+            array(
+                '$1',
+                '$1$2',
+                '}',
+                '$1$3',
+                '$1.$3'
+            ),
+        $input);
+
+
+    }
+
+}
+
