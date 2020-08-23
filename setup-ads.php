@@ -15,12 +15,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Inline Google Ads JS in the Header
-add_filter( 'wp_head', 'setup_inline_adsbygoogle_js_func' );
+/*add_filter( 'wp_head', 'setup_inline_adsbygoogle_js_func' );
 function setup_inline_adsbygoogle_js_func() {
 	?><script type="text/javascript"><?php
 		echo file_get_contents( 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js' );
-	?></script><?PHP
-}
+	?></script><?php
+}*/
+
+
+// Add Google Ads JS in the footer
+/*add_action( 'wp_footer', 'setup_paste_adsbygoogle_js_func' );
+function setup_paste_adsbygoogle_js_func() {
+	?>
+	<script data-ad-client="ca-pub-0947746501358966" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<?php
+}*/
 
 
 // Load the Google AD script after x number of minutes
