@@ -21,7 +21,7 @@ function setup_load_google_ad_js_func() {
 	if( setup_bot_detected() ) {
 
 		// original
-		//echo '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>';
+		//echo '<script data-ad-client="ca-pub-0947746501358966" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>';
 
 		echo setup_minify_javascript( '<script type="text/javascript">
 			jQuery( document ).ready( function() {
@@ -49,7 +49,7 @@ function setup_load_google_ad_js_func() {
 		// OLD CODE: <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"><\/script>
 	}
 
-} //jQuery( this ).append( <? php echo setup_show_these_ads(); ? > );
+}
 
 
 // shortcode for calling the ad display handler
@@ -74,20 +74,6 @@ function setup_adsbygoogle_function() {
 		//return 'Ads original placement.';
 	}
 
-}
-function setup_show_these_ads() {
-	return '<div>
-				<!-- Page & Post Article Body Resposive Ad -->
-				<ins class="adsbygoogle"
-					style="display:block"
-					data-ad-client="ca-pub-0947746501358966"
-					data-ad-slot="7597430493"
-					data-ad-format="auto">
-				</ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>
-			</div>';
 }
 
 
@@ -121,12 +107,18 @@ function setup_adsbygoogle_function_2() {
 add_filter( 'widget_text', 'do_shortcode' );
 
 
+/* --------------------------------------------------------------------------------------------
+ * | ADS AFTER MENU (HEADER)
+ * ----------------------------------------------------------------------------------------- */
 add_action( 'genesis_before_content_sidebar_wrap', 'top_google_ads' );
 function top_google_ads() {
 	echo '<div class="padding">'.do_shortcode( "[spk_adsbygoogle_js][/spk_adsbygoogle_js]" ).'</div>';
 }
 
 
+/* --------------------------------------------------------------------------------------------
+ * | ADS BEFORE FOOTER
+ * ----------------------------------------------------------------------------------------- */
 add_action( 'genesis_after_content_sidebar_wrap', 'bottom_google_ads' );
 function bottom_google_ads() {
 	echo '<div class="padding">'.do_shortcode( "[spk_adsbygoogle_js][/spk_adsbygoogle_js]" ).'</div>';
@@ -193,7 +185,7 @@ function setup_bot_detected() {
 /* --------------------------------------------------------------------------------------------
  * | Putting the Amazon scripts here to test if we can enqueue the scripts properly
  * ----------------------------------------------------------------------------------------- */
-add_shortcode( 'spk_amazon_market_place', 'spk_amazon_market_place_func' );
+/*add_shortcode( 'spk_amazon_market_place', 'spk_amazon_market_place_func' );
 function spk_amazon_market_place_func() {
 
 	if( setup_bot_detected() ) {
@@ -201,7 +193,7 @@ function spk_amazon_market_place_func() {
 		return '<div id="amzn-assoc-ad-9f2cb097-ecee-468c-b007-0b4fcd5a22c9"></div><script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=9f2cb097-ecee-468c-b007-0b4fcd5a22c9"></script>';
 	}
 	
-}
+}*/
 
 // ##########################################################################################################################
 // # LAZY LOAD ADS ##########################################################################################################
@@ -209,7 +201,7 @@ function spk_amazon_market_place_func() {
 // ##########################################################################################################################
 // ##########################################################################################################################
 
-add_action( 'wp_footer', 'setup_inline_ss_ads_js', 100 );
+/*add_action( 'wp_footer', 'setup_inline_ss_ads_js', 100 );
 function setup_inline_ss_ads_js() {
 
 	$js_file = file_get_contents( plugins_url( 'js/ss_ads_asset.js', __FILE__ ) );
@@ -230,12 +222,12 @@ function setup_inline_ss_ads_js() {
 add_action ( 'wp_head', 'my_js_variables', 10000 );
 function my_js_variables(){ 
 
-	/*$sol_plug_dir = plugins_url().'/soliloquy/assets/css/';
+	/ * $sol_plug_dir = plugins_url().'/soliloquy/assets/css/';
     $soliloquy_css = file_get_contents( $sol_plug_dir.'soliloquy.css' );
     if( !empty( $soliloquy_css ) ) {
         $soli_styles = str_replace( 'images/', $sol_plug_dir.'images/', $soliloquy_css );
         //echo setup_minify_css( $soliloquy_css );
-    }*/
+    } * /
 
 	?>
 	<script type="text/javascript">
@@ -245,7 +237,7 @@ function my_js_variables(){
 //		'soli_styles' => $soli_styles,
 	) ); ?>
 	</script><?php
-}
+}*/
 
 
 // JAVASCRIPT MINIFIER
