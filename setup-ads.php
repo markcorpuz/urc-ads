@@ -130,7 +130,11 @@ add_filter( 'widget_text', 'do_shortcode' );
  * ----------------------------------------------------------------------------------------- */
 add_action( 'genesis_before_content_sidebar_wrap', 'top_google_ads' );
 function top_google_ads() {
-	echo '<div class="padding">'.do_shortcode( "[spk_adsbygoogle_js][/spk_adsbygoogle_js]" ).'</div>';
+
+	if( is_page( 'free-ebook' ) ) {
+		echo '<div class="padding-bottom">'.do_shortcode( "[spk_adsbygoogle_js][/spk_adsbygoogle_js]" ).'</div>';
+	}
+	
 }
 
 
@@ -139,7 +143,7 @@ function top_google_ads() {
  * ----------------------------------------------------------------------------------------- */
 add_action( 'genesis_after_content_sidebar_wrap', 'bottom_google_ads' );
 function bottom_google_ads() {
-	echo '<div class="padding">'.do_shortcode( "[spk_adsbygoogle_js][/spk_adsbygoogle_js]" ).'</div>';
+	echo '<div class="padding-top">'.do_shortcode( "[spk_adsbygoogle_js][/spk_adsbygoogle_js]" ).'</div>';
 }
 
     	/*return '<script async src="'.plugin_dir_url( __FILE__ )."js_external/adsbygoogle.js?ver=".date( 'YmdHis', filemtime( plugin_dir_path( __FILE__ )."js_external/adsbygoogle.js" ) ).'"></script>
