@@ -121,10 +121,6 @@ function setup_adsbygoogle_function_2() {
 }
 
 
-// execute shortcodes in widget
-add_filter( 'widget_text', 'do_shortcode' );
-
-
 /* --------------------------------------------------------------------------------------------
  * | ADS AFTER MENU (HEADER)
  * ----------------------------------------------------------------------------------------- */
@@ -146,19 +142,17 @@ function bottom_google_ads() {
 	echo '<div class="padding-top">'.do_shortcode( "[spk_adsbygoogle_js][/spk_adsbygoogle_js]" ).'</div>';
 }
 
-    	/*return '<script async src="'.plugin_dir_url( __FILE__ )."js_external/adsbygoogle.js?ver=".date( 'YmdHis', filemtime( plugin_dir_path( __FILE__ )."js_external/adsbygoogle.js" ) ).'"></script>
-				<!-- Page & Post Article Body Resposive Ad -->
-				<ins class="adsbygoogle"
-				     style="display:block"
-				     data-ad-client="ca-pub-0947746501358966"
-				     data-ad-slot="7597430493"
-				     data-ad-format="auto"></ins>
-				<script>
-				(adsbygoogle = window.adsbygoogle || []).push({});
-				</script>';
-				*/
-
-
+/*return '<script async src="'.plugin_dir_url( __FILE__ )."js_external/adsbygoogle.js?ver=".date( 'YmdHis', filemtime( plugin_dir_path( __FILE__ )."js_external/adsbygoogle.js" ) ).'"></script>
+<!-- Page & Post Article Body Resposive Ad -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-0947746501358966"
+     data-ad-slot="7597430493"
+     data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>';
+*/
 
 
 /*
@@ -263,7 +257,7 @@ function my_js_variables(){
 
 
 // JAVASCRIPT MINIFIER
-if( !function_exists( 'setup_minify_javascript' ) ) {
+/*if( !function_exists( 'setup_minify_javascript' ) ) {
     
     function setup_minify_javascript( $input ) {
 
@@ -293,5 +287,5 @@ if( !function_exists( 'setup_minify_javascript' ) ) {
 
     }
 
-}
+}*/
 
