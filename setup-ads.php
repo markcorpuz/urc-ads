@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: Setup Ads
+ * Plugin Name: URC Ads
  * Description: Handle all the ads for the site and pulled via shortcode
- * Version: 4.0
+ * Version: 4.0.1
  * Author: Jake Almeda
  * Author URI: http://smarterwebpackages.com/
  * Network: true
