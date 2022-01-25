@@ -2,7 +2,7 @@
 /**
  * Plugin Name: URC Ads
  * Description: Handle all the ads for the site and pulled via shortcode
- * Version: 4.0.1
+ * Version: 4.0.2
  * Author: Jake Almeda
  * Author URI: http://smarterwebpackages.com/
  * Network: true
@@ -77,15 +77,17 @@ function setup_adsbygoogle_function() {
 	if( setup_bot_detected() ) {
 
 		return '<div>
+					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0947746501358966"
+					     crossorigin="anonymous"></script>
 					<!-- Page & Post Article Body Resposive Ad -->
 					<ins class="adsbygoogle"
-						style="display:block"
-						data-ad-client="ca-pub-0947746501358966"
-						data-ad-slot="7597430493"
-						data-ad-format="auto">
-					</ins>
+					     style="display:block"
+					     data-ad-client="ca-pub-0947746501358966"
+					     data-ad-slot="7597430493"
+					     data-ad-format="auto"
+					     data-full-width-responsive="true"></ins>
 					<script>
-					(adsbygoogle = window.adsbygoogle || []).push({});
+					     (adsbygoogle = window.adsbygoogle || []).push({});
 					</script>
 				</div>';
 		
@@ -106,11 +108,15 @@ function setup_adsbygoogle_function_2() {
 	if( setup_bot_detected() ) {
 
     	return '<div>
+					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-0947746501358966"
+					     crossorigin="anonymous"></script>
+					<!-- Page & Post Article Body Resposive Ad -->
 					<ins class="adsbygoogle"
 					     style="display:block"
-					     data-ad-format="autorelaxed"
 					     data-ad-client="ca-pub-0947746501358966"
-					     data-ad-slot="2135583692"></ins>
+					     data-ad-slot="7597430493"
+					     data-ad-format="auto"
+					     data-full-width-responsive="true"></ins>
 					<script>
 					     (adsbygoogle = window.adsbygoogle || []).push({});
 					</script>
