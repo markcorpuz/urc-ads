@@ -2,7 +2,7 @@
 /**
  * Plugin Name: URC Ads
  * Description: Handle all the ads for the site and pulled via shortcode
- * Version: 4.0.2
+ * Version: 4.0.3
  * Author: Jake Almeda
  * Author URI: http://smarterwebpackages.com/
  * Network: true
